@@ -1,0 +1,93 @@
+@charset "UTF-8";
+@import "mysite.css";
+
+#gallery	{ margin:20px auto; width:540px }
+#gallery h1 {
+	color:#333;
+	margin-bottom:10px;
+	background:url('../images/gallery.png') 0 0 no-repeat;
+	background-size:35px;
+	padding-left:40px;
+	float:left
+}
+
+#gallery ul		{ width:100%; clear:both }
+#gallery ul li	{
+	position:relative;
+	float:left;
+	padding:2px;
+	border:1px solid #CCC;
+	border-radius:3px;
+	background-color:#F0F0F0;
+	margin:0 0 10px 10px;
+	height:114px;
+	width:114px;
+	overflow-y:hidden
+}
+
+#gallery ul li a {
+	display:block;
+	font-size:0;
+	text-indent:-9999px;
+	outline:none
+}
+#gallery ul li a.image {
+	width:114px;
+	height:114px;
+	background-size:114px;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+#gallery ul li a.btn-delete {
+	position:absolute;
+	width:18px;
+	height:18px;
+	font-size:0;
+	background-image:url('../images/delete.png') 0 0 no-repeat;
+	background-size:18px;
+	right:3px;
+	top:3px;
+	display:none
+}
+#gallery ul li:hover a.btn-delete {
+	display:block;
+}
+
+#upload-image {
+	text-decoration:none;
+	display:block;
+	float:right;
+	padding:10px 10px 10px 10px;
+	border: 1px solid #333;
+	font-weight:bold;
+	background-color: #999;
+	color:#FFF;
+	margin-bottom:10px;
+	outline:none
+}
+
+/* 이미지 업로드 대화상자 (팝업 레이어) */
+#dialog-upload-form			{ text-align:left; display:block }
+#dialog-upload-form p 		{ padding:20px 0 5px 0; font-weight:bold; font-size:1.1em }
+#dialog-upload-form label,
+#dialog-upload-form input	{ display:block }
+#dialog-upload-form label	{ font-weight:bold; margin-top:10px }
+#dialog-upload-form input	{ outline:none; margin-top:5px }
+#dialog-upload-form input[type='text'] {
+	padding:5px;
+	border:2px solid #CCC;
+	width:260px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

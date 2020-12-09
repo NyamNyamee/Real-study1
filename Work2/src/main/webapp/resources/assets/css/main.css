@@ -1,0 +1,21 @@
+@charset "UTF-8";
+@import "mysite.css";
+/*
+	@ : CSS 지시자
+	@charset : 파일 인코딩 설정
+	@import	 : 다른 CSS 파일 포함
+*/
+
+#site-introduction				{ padding:20px; width:540px }
+#site-introduction img#profile	{ display:block; float:left; width:275px; height:180px }
+#site-introduction h2			{ float:left; width:340px; margin:50px 0 0 20px }
+#site-introduction p			{ clear:both; font-size:1.1em; padding:20px; line-height:1.5em }
+
+
+
+
+
+
+
+
+
