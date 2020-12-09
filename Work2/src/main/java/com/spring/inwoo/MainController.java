@@ -1,14 +1,12 @@
 package com.spring.inwoo;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-	private static final Log LOG
-		= LogFactory.getLog(MainController.class);
+	//logback 테스트 
+	// private static final Log LOG = LogFactory.getLog(MainController.class);
 	
 	/*
 	 *  프로젝트 우 클릭 -> run on server 실행 시,
@@ -22,10 +20,11 @@ public class MainController {
 		return "main/index";
 	}
 	
-	// Logger Test
+	/*
+	// logback 테스트
 	@RequestMapping("/logger")
 	public String logger() {
-		LOG.debug("MainController.logger() Called...");
+		LOG.debug("MainController.logger() Called...---------------------------------------------");
 		
 		// 강제 실행 예외 발생! (GlobalExceptionHandler Test)
 //		if(1 - 1 == 0) {
@@ -34,6 +33,7 @@ public class MainController {
 		
 		return "TODO"; // 404 Not Found
 	}
+	*/
 }
 
 

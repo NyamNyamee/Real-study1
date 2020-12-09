@@ -7,7 +7,7 @@
 		<!-- if~else와 switch가 복합적으로 사용되는 JSTL 조건 부여! -->
 		<c:choose>
 			<c:when test="${ empty authUser }">
-				<li><a href="${pageContext.request.contextPath}/user/loginform">로그인</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/joinform">회원가입</a></li>
 			</c:when>
 			<c:otherwise>

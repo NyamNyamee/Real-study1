@@ -4,7 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.spring.inwoo.dao.UserDao">
-	<insert id="insert" parameterType="uservo">
+	<insert id="insert" parameterType="UserVo">
 		<![CDATA[
 			insert into users (name, email, password, gender)
 			values (#{name}, #{email}, #{password}, #{gender})
@@ -39,7 +39,7 @@
 		<![CDATA[
 			select *
 			from users
-			where name=#{name}
+			where email=#{email}
 		]]>
 	</select>
 	

@@ -67,14 +67,11 @@
 	<select id="getTotalCount" parameterType="string" resultType="int">
 		<![CDATA[
 			select count(*)
-			  from board
+			  	from board
+			where title like CONCAT(CONCAT('%', LOWER(#{keyword})), '%')
+				or content like CONCAT(CONCAT('%', LOWER(#{keyword})), '%')
 		]]>
-		<if test="keyword != null and keyword != ''">
-			<![CDATA[
-				where title like '%#{keyword}%'
-				   or content like '%#{keyword}%'
-			]]>
-		</if>
+		
 		<!-- 
 			검색 키워드가 defaultValue="" 형태이므로, 모두 조회
 			검색 키워드 전달 시 조건을 수행하여 해당 개수만 조회 하겠다.
@@ -87,7 +84,7 @@
 		 -->
 	</select>
 	
-	<select id="getList" parameterType="map" resultType="BoardVo">											
+	<select id="getList" parameterType="hashmap" resultType="BoardVo">											
 		<choose>
 			<when test="keyword != null and keyword != ''">
 				<![CDATA[
@@ -110,9 +107,9 @@
 					  		   		    from board b,
 					  		   		         users u
 					  		   		   where b.users_no = u.no
-					  		   		     and (b.title like '%#{keyword}%'
-					  		   		         or b.content like '%#{keyword}%')
-					  		   		order by group_no desc, order_no asc ) x,
+					  		   		     and (b.title like CONCAT(CONCAT('%', LOWER(#{keyword})), '%')
+					  		   		         or b.content like CONCAT(CONCAT('%', LOWER(#{keyword})), '%'))
+					  		   		order by b.reg_date desc) x,
 					  		   		 ( select @rownum := 0 ) r ) y
 					 where (#{page}-1)*#{size}+1 <= rn and rn <= #{page}*#{size}
 				]]>				
@@ -138,7 +135,7 @@
 					  		   		    from board b,
 					  		   		         users u
 					  		   		   where b.users_no = u.no
-					  		   		order by group_no desc, order_no asc ) x,
+					  		   		order by b.reg_date desc ) x,
 					  		   		 ( select @rownum := 0 ) r ) y
 					 where (#{page}-1)*#{size}+1 <= rn and rn <= #{page}*#{size}
 				]]>	

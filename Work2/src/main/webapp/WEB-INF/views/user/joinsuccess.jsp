@@ -15,7 +15,7 @@
 			<div id="user">
 				<p class="join-success">
 					회원 가입을 환영합니다.<br><br>
-					<a href="${pageContext.request.contextPath}/user/loginform">로그인</a>
+					<a href="${pageContext.request.contextPath}/user/login">로그인</a>
 				</p>
 			</div>
 		</div>

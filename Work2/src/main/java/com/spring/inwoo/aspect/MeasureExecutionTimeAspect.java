@@ -21,7 +21,7 @@ public class MeasureExecutionTimeAspect {
 	 *  Service, Repository -> applicationContext.xml
 	 */
 	// || : PointCut을 2개 이상 적용!
-	@Around("execution( * *..controller.*.*(..) ) || execution( * *..service.*.*(..) ) || execution( * *..repository.*.*(..) )")
+	@Around("execution( * *..controller.*.*(..) ) || execution( * *..service.*.*(..) ) || execution( * *..dao.*.*(..) )")
 	public Object around(ProceedingJoinPoint pjp) throws Throwable {
 		// 1. 메소드 수행 전 (@Before)
 		//	-> 기록 측정 시작

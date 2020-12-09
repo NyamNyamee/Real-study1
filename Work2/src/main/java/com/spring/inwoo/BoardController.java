@@ -2,6 +2,8 @@ package com.spring.inwoo;
 
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +23,19 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@RequestMapping("")
+	private static final Log LOG = LogFactory.getLog( BoardController.class );
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String index(
 			@RequestParam(value="p", required=true, defaultValue="1") Integer page,
 			@RequestParam(value="kwd", required=true, defaultValue="") String keyword,
 			Model model
 			) {
-		Map<String, Object> map = boardService.getMessageList(page, keyword);
+		Map<String, Object> map = boardService.getList(keyword, page, 5);
+		
+		LOG.debug("--------------------------" + page + ", " + keyword);
+		LOG.debug("--------------------------" + "map.list=" + ": " + map.get("list"));
+		
 		model.addAttribute("map", map);
 		
 		return "board/index";

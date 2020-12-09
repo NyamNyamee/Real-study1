@@ -13,7 +13,7 @@ public interface BoardDao {
 	
 	public int getTotalCount(String keyword);
 	
-	public List<BoardVo> getList(HashMap<String, String> map);
+	public List<BoardVo> getList(HashMap<String, Object> map);
 	
 	public BoardVo getByNo(Long no);
 	

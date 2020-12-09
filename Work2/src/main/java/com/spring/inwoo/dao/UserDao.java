@@ -27,7 +27,7 @@ public interface UserDao {
 	public UserVo getByNo(Long no);
 	
 	// 이름으로 사용자 정보 가져오기
-	public List<UserVo> getByName(String name);
+	public List<UserVo> getByName(String email);
 	
 	// 사용자 정보 수정
 	public void update(UserVo vo);

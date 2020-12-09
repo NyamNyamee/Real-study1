@@ -7,16 +7,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.spring.inwoo.BoardController;
 import com.spring.inwoo.dao.UserDao;
 import com.spring.inwoo.vo.UserVo;
 
 
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
+	private static final Log LOG = LogFactory.getLog( BoardController.class );
+	
 	@Autowired
 	private UserDao userDao;
 	private String successUrl;
@@ -29,8 +34,9 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 		// 세션 타임아웃 시간 지정
 		request.getSession().setMaxInactiveInterval(time);
 		// 회원 정보를 읽어 세션에 저장
-		String username = request.getParameter("username"); // 아이디 읽기
-		List<UserVo> list = userDao.getByName(username);
+		String email = request.getParameter("email"); // 아이디 읽기
+		List<UserVo> list = userDao.getByName(email);
+		LOG.debug("--------------------------------email: " + email);
 		if(list!=null && list.size() > 0)
 		{
 			UserVo vo = list.get(0);

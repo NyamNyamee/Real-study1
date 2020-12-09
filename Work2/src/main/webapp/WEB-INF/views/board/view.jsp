@@ -8,8 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="./resources/assets/css/board.css" rel="stylesheet" type="text/css">
+<title>view</title>
+<link href="${pageContext.request.contextPath}/resources/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">

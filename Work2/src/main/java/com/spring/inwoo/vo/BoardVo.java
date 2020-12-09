@@ -3,14 +3,14 @@ package com.spring.inwoo.vo;
 public class BoardVo {
 	private Long no;
 	private String title;
-	private String content;
+	private String userName;
 	private String regDate;
 	private Integer hit;
+	private String content;
 	private Integer groupNo;
 	private Integer orderNo;
 	private Integer depth;
 	private Long userNo;
-	private String userName;
 	
 	public Long getNo() {
 		return no;

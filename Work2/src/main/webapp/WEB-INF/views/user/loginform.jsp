@@ -17,9 +17,9 @@
 					<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<label class="block-label" for="email">이메일</label>
-					<input id="email" name="email" type="text" value="">
+					<input id="email" name="email" type="text">
 					<label class="block-label">패스워드</label>
-					<input name="password" type="password" value="">
+					<input name="password" type="password">
 					
 					<input type="submit" value="로그인">
 				</form>

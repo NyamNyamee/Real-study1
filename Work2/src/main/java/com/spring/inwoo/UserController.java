@@ -2,8 +2,6 @@ package com.spring.inwoo;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,12 +42,9 @@ public class UserController {
 	
 	// 로그인화면
 	@RequestMapping(value = "/login")
-	public String login(HttpServletRequest request, Model model)
+	public String login()
 	{
-		String referer = request.getHeader("referer");
-		model.addAttribute("referer", referer);
-			
-		return "loginform";
+		return "user/loginform"; // view 전달
 	}
 		
 	// 아이디중복확인

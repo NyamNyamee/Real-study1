@@ -28,19 +28,19 @@
 					</tr>
 					<c:forEach items="${map.list}" var="vo" varStatus="status">
 						<tr>
-							<td>${map.totalCount - (map.currentPage - 1) * map.listSize - status.index}</td>
+							<td>${map.totalCount - (map.page - 1) * map.listSize - status.index}</td>
 							<c:choose>
 								<c:when test="${vo.depth > 0}">
 									<td class="left" style="padding-left:${15*vo.depth}px">
 										<img src="./resources/assets/images/reply.png">
 										<a href="${pageContext.request.contextPath}/board/view?
-											no=${vo.no}&p=${map.currentPage}&kwd=${map.keyword}">${vo.title}</a>
+											no=${vo.no}&p=${map.page}&kwd=${map.keyword}">${vo.title}</a>
 									</td>
 								</c:when>
 								<c:otherwise>
 									<td class="left">
 										<a href="${pageContext.request.contextPath}/board/view?
-											no=${vo.no}&p=${map.currentPage}&kwd=${map.keyword}">${vo.title}</a>
+											no=${vo.no}&p=${map.page}&kwd=${map.keyword}">${vo.title}</a>
 									</td>									
 								</c:otherwise>
 							</c:choose>
@@ -51,7 +51,7 @@
 								<c:choose>
 									<c:when test="${not empty authUser && authUser.no == vo.userNo}">
 										<a href="${pageContext.request.contextPath}/board/delete?
-											no=${vo.no}&p=${map.currentPage}&kwd=${map.keyword}"
+											no=${vo.no}&p=${map.page}&kwd=${map.keyword}"
 											class="del">삭제</a>
 									</c:when>
 									<c:otherwise>
@@ -74,7 +74,7 @@
 								<c:when test="${map.endPage < page}">
 									<li>${page}</li>
 								</c:when>
-								<c:when test="${map.currentPage == page}">
+								<c:when test="${map.page == page}">
 									<li class="selected">${page}</li>
 								</c:when>
 								<c:otherwise>

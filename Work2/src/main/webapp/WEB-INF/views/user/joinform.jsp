@@ -60,35 +60,20 @@
 		<div id="content">
 			<div id="user">
 				<!-- form:form : 데이터 바인딩 및 에러 처리 관련 스프링 프레임워크 태그 제공 -->
-				<form:form modelAttribute="userVo" id="join-form" name="joinform" method="post" action="${pageContext.request.contextPath}/user/join">
+				<form id="join-form" name="joinform" method="post" action="${pageContext.request.contextPath}/user/join">
+					<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<label class="block-label" for="name">이름</label>
-					<form:input path="name" />
-					<p style="text-align:left; color:red">
-						<form:errors path="name"/>
-					</p>
-					
+					<input name="name" type="text"/>
 					<label class="block-label" for="email">이메일</label>
-					<form:input path="email" />
+					<input id="email" name="email" type="text"/>
 					<!-- 사용가능한 이메일이라면 이미지 보여주기 -->
 					<img id="img-chkemail" align="top" style="width:16px; display:none"
 						src="${pageContext.request.contextPath}/resources/assets/images/check.png">
 					<input id="btn-chkemail" type="button" value="중복체크">
-					<p style="text-align:left; color:red">
-						<form:errors path="email" />
-					</p>
-					
 					<label class="block-label">패스워드</label>
-					<form:password path="password" />
-					<spring:hasBindErrors name="userVo">
-						<c:if test="${errors.hasFieldErrors('password')}">
-							<p style="test-align:left; color:red">
-								<spring:message
-									code="${errors.getFieldError('password').codes[0]}"
-									text="${errors.getFieldError('password').defaultMessage}"
-								/>
-							</p>
-						</c:if>
-					</spring:hasBindErrors>
+					<input type="password" name="password"/>
+				
 					
 					<fieldset>
 						<legend>성별</legend>
@@ -103,7 +88,7 @@
 					</fieldset>
 					
 					<input type="submit" value="가입하기">
-				</form:form>
+				</form>
 			</div>
 		</div>
 		<!-- 
