@@ -19,10 +19,9 @@ public interface UserDao {
 	// 중복 이메일 체크
 	public int getByEmail(String email);
 	
-	// 인증(로그인), 사용자 정의 예외 발생
+	// 인증(로그인)
 	public UserVo getByEmailAndPassword(HashMap<String, String> map);
 		
-	
 	// 사용자 정보 가져오기
 	public UserVo getByNo(Long no);
 	
