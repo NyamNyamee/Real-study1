@@ -64,12 +64,17 @@
 			access="permitAll" />
 		<security:form-login 
 			login-page="/user/login"
-			default-target-url="/main" 
+			login-processing-url="/user/login"
+			default-target-url="/main"
 			username-parameter="email"
 			password-parameter="password"
-			authentication-failure-url="/Access_Denied"
-			authentication-success-handler-ref="loginSuccessHandler" />
-			<!-- access denied page 
+			authentication-failure-url="/user/Access_Denied"
+			authentication-success-handler-ref="loginSuccessHandler"
+			 /> 
+			<!--
+			authentication-failure-handler-ref="loginFailureHandler"
+			 
+			access denied page 
 		<security:access-denied-handler error-page="/403" />
 		<security:logout logout-success-url="/login?logout"  />
 		-->
@@ -86,9 +91,14 @@
     
 	
 	<bean id="loginSuccessHandler" class="com.spring.inwoo.security.MyAuthenticationSuccessHandler">
-		<property name="successUrl" value="/"></property>
+		<property name="successUrl" value="/inwoo"></property>
 	</bean>
 	
+	<!-- 
+	<bean id="loginFailureHandler" class="com.spring.inwoo.security.MyAuthenticationFailureHandler">
+		<property name="failureUrl" value="/inwoo/user/login"></property>
+	</bean>
+	 -->
 	
 	
 	<security:authentication-manager>

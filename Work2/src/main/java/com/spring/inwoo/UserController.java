@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +28,8 @@ import com.spring.inwoo.vo.UserVo;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	private static final Log LOG = LogFactory.getLog( BoardController.class );
+	
 	@Autowired
 	private UserService userService;
 	
@@ -49,9 +53,16 @@ public class UserController {
 	}
 	
 	// 로그인화면
-	@RequestMapping(value = "/login")
-	public String login()
+	@RequestMapping(value="/login")
+	public String login(HttpServletRequest request, Model model)
 	{
+		/*
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		LOG.debug("----------------------loginform is called----------------------------" + email + ", " + password);
+		model.addAttribute("email", email);
+		model.addAttribute("password", password);
+		*/
 		return "user/loginform"; // view 전달
 	}
 		
@@ -65,7 +76,7 @@ public class UserController {
 	
 	// @Valid : Bean의 유효성 자동 검증
 	//	-> 스프링 입력 폼으로부터 넘어오는 userVo의 데이터(값)가 유효한지 판단!
-	@RequestMapping("/join")
+	@RequestMapping(value="/join")
 	public String join(@ModelAttribute UserVo userVo
 					 , BindingResult result) {
 		if(result.hasErrors()) {
@@ -141,7 +152,7 @@ public class UserController {
 	
 
 	// 로그인실패화면
-	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+	@RequestMapping(value="/Access_Denied", method = RequestMethod.GET)
 	public String accessDeniedPage(Model model)
 	{
 		String userid = getPrincipal();
@@ -151,7 +162,7 @@ public class UserController {
 	}
 	
 	// 로그아웃
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.inwoo.dao.GalleryDao;
@@ -14,6 +15,7 @@ import com.spring.inwoo.exception.GalleryUploadException;
 import com.spring.inwoo.vo.GalleryVo;
 
 @Service("galleryService")
+@Transactional
 public class GalleryServiceImpl implements GalleryService{
 	private static final String SAVE_PATH
 		= "C:\\Users\\user\\Desktop\\인우\\Workspaces\\STSWorkspace1\\Work2\\src\\main\\webapp\\resources\\upload";

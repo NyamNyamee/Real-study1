@@ -15,6 +15,8 @@
 			<div id="user">
 				<form id="join-form" name="joinform" method="post"
 					action="${pageContext.request.contextPath}/user/modify">
+					<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="${userVo.name}">
 					

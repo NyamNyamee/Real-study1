@@ -38,6 +38,24 @@ public class UserVo {
 
 	private String role;
 	
+	
+	
+	public UserVo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public UserVo(Long no, String name, String email, String password, String gender, Integer enabled, String role) {
+		super();
+		this.no = no;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.gender = gender;
+		this.enabled = enabled;
+		this.role = role;
+	}
+
 	public Long getNo() {
 		return no;
 	}

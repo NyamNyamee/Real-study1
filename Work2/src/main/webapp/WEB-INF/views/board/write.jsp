@@ -15,6 +15,8 @@
 			<div id="board">
 				<form class="write-form" method="post"
 					action="${pageContext.request.contextPath}/board/write">
+					<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>

@@ -16,6 +16,8 @@
 				<form id="search-form" method="get" action="${pageContext.request.contextPath}/board">
 					<input type="text" id="kwd" name="kwd">
 					<input type="submit" value="검색">	
+					<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				</form>
 				<table class="tbl-ex">
 					<tr>

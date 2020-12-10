@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>main page</title>
 <link href="./resources/assets/css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>

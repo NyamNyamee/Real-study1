@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.inwoo.dao.BoardDao;
 import com.spring.inwoo.vo.BoardVo;
 
 @Service("boardService")
+@Transactional
 public class BoardServiceImpl implements BoardService{
 	private static final int LIST_SIZE = 5; // 게시물 개수
 	private static final int PAGE_SIZE = 5; // 페이지 개수

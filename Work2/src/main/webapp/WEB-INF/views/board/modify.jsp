@@ -16,6 +16,8 @@
 			<div id="board">
 				<form class="write-form" method="post"
 					action="${pageContext.request.contextPath}/board/modify">
+					<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" name="no" value="${boardVo.no}">
 					<input type="hidden" name="p" value="${page}">
 					<input type="hidden" name="kwd" value="${keyword}">

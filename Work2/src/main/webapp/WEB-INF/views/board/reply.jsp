@@ -15,6 +15,8 @@
 			<div id="board">
 				<form class="write-form" method="post"
 					action="${pageContext.request.contextPath}/board/write">
+					<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" name="groupNo" value="${boardVo.groupNo}"/>
 					<input type="hidden" name="orderNo" value="${boardVo.orderNo}"/>
 					<input type="hidden" name="depth" value="${boardVo.depth}"/>

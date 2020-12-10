@@ -36,13 +36,14 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 		// 회원 정보를 읽어 세션에 저장
 		String email = request.getParameter("email"); // 아이디 읽기
 		List<UserVo> list = userDao.getByName(email);
-		LOG.debug("--------------------------------email: " + email);
+		// LOG.debug("--------------------------------email: " + email);
 		if(list!=null && list.size() > 0)
 		{
 			UserVo vo = list.get(0);
 			// 회원정보를 세션에 저장하기
 			request.getSession().setAttribute("userVo", vo);
 		}
+		// LOG.debug("login success---------------------------------------------------------, successUrl= " + successUrl);
 		// 어딘가로 이동
         // request.getRequestDispatcher(successUrl).forward(request, response);
 		response.sendRedirect(successUrl);
