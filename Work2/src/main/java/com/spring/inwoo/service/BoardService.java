@@ -25,4 +25,5 @@ public interface BoardService {
 
 	public void update(BoardVo boardVo);
 
+	public void delete(Long no);
 }

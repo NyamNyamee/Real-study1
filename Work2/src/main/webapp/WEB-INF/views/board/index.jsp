@@ -51,10 +51,8 @@
 							<td>${vo.regDate}</td>
 							<td>
 								<c:choose>
-									<c:when test="${not empty authUser && authUser.no == vo.userNo}">
-										<a href="${pageContext.request.contextPath}/board/delete?
-											no=${vo.no}&p=${map.page}&kwd=${map.keyword}"
-											class="del">삭제</a>
+									<c:when test="${not empty sessionScope.userVo && sessionScope.userVo.no == vo.userNo}">
+										<a id="delConfirm" href="${pageContext.request.contextPath}/board/delete?no=${vo.no}" class="del">삭제</a>
 									</c:when>
 									<c:otherwise>
 										&nbsp;
@@ -93,9 +91,8 @@
 					</ul>
 				</div>
 				<div class="bottom">
-					<c:if test="${not empty authUser}">
-						<a href="${pageContext.request.contextPath}/board/write"
-							id="new-book">글쓰기</a>
+					<c:if test="${not empty sessionScope.userVo}">
+						<a href="${pageContext.request.contextPath}/board/write" id="new-book">글쓰기</a>
 					</c:if>
 				</div>
 			</div>

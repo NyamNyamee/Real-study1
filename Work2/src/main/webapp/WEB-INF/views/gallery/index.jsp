@@ -14,7 +14,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 <script src="./resources/assets/js/lightbox.js" type="text/javascript"></script>
 
-<c:if test="${not empty authUser}">
+<c:if test="${not empty sessionScope.userVo}">
 	<script type="text/javascript">
 		$(function() {
 			// 대화상자 (다이얼로그)
@@ -51,7 +51,7 @@
 			<div id="gallery">
 				<div>
 					<h1>갤러리</h1>
-					<c:if test="${ not empty authUser }">
+					<c:if test="${ not empty sessionScope.userVo }">
 						<a href="" id="upload-image">이미지 올리기</a>
 					</c:if>
 				</div>
@@ -65,7 +65,7 @@
 								style="background-image:url('${pageContext.request.contextPath}${baseURL}/${vo.saveFileName}')">
 								&nbsp;	
 							</a>
-							<c:if test="${ not empty authUser && authUser.no == vo.userNo }">
+							<c:if test="${ not empty sessionScope.userVo && sessionScope.userVo.no == vo.userNo }">
 								<a href="${pageContext.request.contextPath}/gallery/delete/${vo.no}"
 									class="btn-delete"
 									title="삭제"></a>
@@ -75,12 +75,12 @@
 				</ul>
 			</div>
 			
-			<c:if test="${not empty authUser}">
-				<div id="dialog-upload-form" title="이미지 업로드"
-					style="display:none">
+			<c:if test="${not empty sessionScope.userVo}">
+				<div id="dialog-upload-form" title="이미지 업로드" style="display:none">
 					<p class="validateTips normal">이미지와 간단한 설명을 입력해 주세요.</p>
-					<form method="post" enctype="multipart/form-data"
-						action="${pageContext.request.contextPath}/gallery/upload">
+					<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/gallery/upload">
+						<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<label>Comment</label>
 						<input type="text" id="input-comments" name="comments" value="">
 						<label>Image</label>

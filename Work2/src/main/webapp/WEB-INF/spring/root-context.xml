@@ -12,6 +12,12 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 프로퍼티 파일 사용 -->
 	<context:property-placeholder location="classpath:db.properties" />
+	
+	<!-- 트랜젝션 관리자 추가 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+	
 	<!-- 트랜젝션을 transactionManager를 이용하여 어노테이션으로 하겠다. -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -35,11 +41,6 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
-	<!-- 트랜젝션 관리자 추가 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>			
-	
 	<!-- XML, JSON출력 관련 -->
 	<!-- MessageConverter 등록 -->
 	<bean id="xmlMessageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter" />
@@ -54,7 +55,7 @@
 		</property>
 	</bean>
 	
-<!-- 시큐리티 추가 시작 -->
+	<!-- 시큐리티 추가 시작 -->
 	<!-- 시큐리티에서 제공하는 암호화 객체 등록
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 	 -->

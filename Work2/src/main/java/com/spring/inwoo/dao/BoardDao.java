@@ -20,6 +20,8 @@ public interface BoardDao {
 	public void updateHit(Long no);
 	
 	public int update(BoardVo boardVo);
+	
+	public void delete(Long no);
 }
 
 

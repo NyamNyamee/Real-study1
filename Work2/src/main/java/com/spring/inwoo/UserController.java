@@ -123,18 +123,18 @@ public class UserController {
 		return "user/modifyform"; // View
 	}
 
-	@RequestMapping(value="/modify", method = RequestMethod.POST)
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(@ModelAttribute UserVo vo) {
-		
+
 		LOG.debug("----------------------------------modifyOk userVo=" + vo);
 		List<UserVo> list = userService.getByName(vo.getEmail());
-		
+
 		// 입력한 패스워드와 db상 저장된 패스워드가 동일할 때에만 정보수정
-		if(list.get(0).getPassword().equals(vo.getPassword())) {
+		if (list.get(0).getPassword().equals(vo.getPassword())) {
 			userService.update(vo);
 			return "redirect:/user/modifyform?update=success";
 		}
-		
+
 		return "redirect:/user/modifyform?update=fail";
 	}
 

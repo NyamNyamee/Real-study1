@@ -147,6 +147,12 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public void delete(Long no) {
+		boardDao.delete(no);
+	}
 }
 
 

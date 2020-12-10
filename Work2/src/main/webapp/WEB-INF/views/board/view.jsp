@@ -41,10 +41,10 @@
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath}/board?
 						p=${page}&kwd=${keyword}">글 목록</a>
-					<c:if test="${ not empty authUser }">
+					<c:if test="${not empty sessionScope.userVo}">
 						<a href="${pageContext.request.contextPath}/board/reply?
 						no=${boardVo.no}&p=${page}&kwd=${keyword}">답글 달기</a>
-						<c:if test="${ authUser.no == boardVo.userNo }">
+						<c:if test="${ userList.get(0).no == boardVo.userNo }">
 							<a href="${pageContext.request.contextPath}/board/modify?
 								no=${boardVo.no}&p=${page}&kwd=${keyword}">글 수정</a>
 						</c:if>
