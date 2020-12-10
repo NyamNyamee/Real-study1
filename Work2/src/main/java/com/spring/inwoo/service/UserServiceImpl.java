@@ -1,6 +1,7 @@
 package com.spring.inwoo.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,11 +44,17 @@ public class UserServiceImpl implements UserService{
 	public UserVo getByNo(Long no) {
 		return userDao.getByNo(no);
 	}
+	
+	@Override
+	public List<UserVo> getByName(String email) {
+		return userDao.getByName(email);
+	}
 
 	@Override
 	public void update(UserVo vo) {
 		userDao.update(vo);
 	}
+
 }
 
 

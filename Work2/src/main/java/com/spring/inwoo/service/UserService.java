@@ -1,5 +1,7 @@
 package com.spring.inwoo.service;
 
+import java.util.List;
+
 import com.spring.inwoo.vo.UserVo;
 
 public interface UserService {
@@ -14,6 +16,9 @@ public interface UserService {
 
 	// 사용자 정보 가져오기
 	public UserVo getByNo(Long no);
+	
+	// 이름으로 사용자 정보 가져오기
+	public List<UserVo> getByName(String email);
 
 	// 사용자 정보 수정
 	public void update(UserVo vo);

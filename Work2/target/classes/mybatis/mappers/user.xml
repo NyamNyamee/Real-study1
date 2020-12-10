@@ -56,7 +56,7 @@
 		<![CDATA[
 			name=#{name},
 			gender=#{gender}
-			where no=#{no}
+			where email=#{email}
 		]]>
 	</update>
 </mapper>

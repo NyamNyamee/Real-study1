@@ -23,7 +23,6 @@
 					
 					<input type="submit" value="로그인">
 				</form>
-				${requestScope.loginFailMsg}
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
