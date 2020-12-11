@@ -25,7 +25,7 @@
 				modal:true,
 				buttons:{
 					'업로드':function() {
-						$('#dialog-upload-form form').submit();
+						$('#uploadForm').submit();
 					},
 					'취소':function() {
 						$(this).dialog('close');
@@ -36,6 +36,7 @@
 				}
 			});
 			
+			// upload-image를 클릭하면 dialogUpload 다이얼로그가 열림
 			$('#upload-image').click(function(event) {
 				event.preventDefault();
 				dialogUpload.dialog('open');
@@ -52,7 +53,7 @@
 				<div>
 					<h1>갤러리</h1>
 					<c:if test="${ not empty sessionScope.userVo }">
-						<a href="" id="upload-image">이미지 올리기</a>
+						<button id="upload-image">이미지 올리기</button>
 					</c:if>
 				</div>
 				<ul>
@@ -65,7 +66,7 @@
 								style="background-image:url('${pageContext.request.contextPath}${baseURL}/${vo.saveFileName}')">
 								&nbsp;	
 							</a>
-							<c:if test="${ not empty sessionScope.userVo && sessionScope.userVo.no == vo.userNo }">
+							<c:if test="${ not empty sessionScope.userVo and sessionScope.userVo.no eq vo.userNo }">
 								<a href="${pageContext.request.contextPath}/gallery/delete/${vo.no}"
 									class="btn-delete"
 									title="삭제"></a>
@@ -75,20 +76,20 @@
 				</ul>
 			</div>
 			
-			<c:if test="${not empty sessionScope.userVo}">
+			
 				<div id="dialog-upload-form" title="이미지 업로드" style="display:none">
 					<p class="validateTips normal">이미지와 간단한 설명을 입력해 주세요.</p>
-					<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/gallery/upload">
+					<form id="uploadForm" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/gallery/upload">
 						<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<label>Comment</label>
-						<input type="text" id="input-comments" name="comments" value="">
+						<input type="text" id="input-comments" name="comments">
 						<label>Image</label>
 						<input type="file" id="input-file" name="file">
 						<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 					</form>
 				</div>
-			</c:if>
+			
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp">
 			<c:param name="menu" value="gallery" />

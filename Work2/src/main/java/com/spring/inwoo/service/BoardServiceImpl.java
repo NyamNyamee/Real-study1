@@ -20,52 +20,31 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardDao boardDao;
 	
-	
-	@Override
-	public boolean writeMessage(BoardVo boardVo) {
-		Integer groupNo = boardVo.getGroupNo();
-		
-		if(groupNo != null) {
-			Integer orderNo = boardVo.getOrderNo();
-			Integer depth = boardVo.getDepth();
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
-			map.put("orderNo", orderNo);
-			map.put("groupNo", groupNo);
-			
-			boardDao.increaseOrderNo(map);
-			boardVo.setOrderNo(orderNo + 1);
-			boardVo.setDepth(depth + 1);
-		}
-		
-		return boardDao.insert(boardVo) == 1;
-	}
-	
-	
-	@Override
-	public BoardVo getMessage(Long no) {
-		BoardVo boardVo = boardDao.getByNo(no);
-		if(boardVo != null)
-			boardDao.updateHit(no);
-		return boardVo;
-	}
-	
-	@Override
-	public boolean updateMessage(BoardVo boardVo) {
-		return boardDao.update(boardVo) == 1;
-	}
-
-	
-	
-	
 	@Override
 	public void increaseOrderNo(Integer groupNo, Integer orderNo) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void insert(BoardVo boardVo) {
-		// TODO Auto-generated method stub
+	public boolean insert(BoardVo boardVo) {
+		Integer groupNo = boardVo.getGroupNo();
+		
+		// 답글일 때
+		if(groupNo != null) {
+			Integer orderNo = boardVo.getOrderNo();
+			Integer depth = boardVo.getDepth();
+			
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("orderNo", orderNo);
+			map.put("groupNo", groupNo);
+			
+			boardDao.increaseOrderNo(map); // 답글 작성시 groupNo와 orderNo를 담은 map을 보내 DB에서 표시순서를 +1씩 업데이트시킴 
+			boardVo.setOrderNo(orderNo + 1);
+			boardVo.setDepth(depth + 1);
+		}
+		
+		return boardDao.insert(boardVo) == 1;
 		
 	}
 
@@ -73,7 +52,7 @@ public class BoardServiceImpl implements BoardService{
 	public int getTotalCount(String keyword) {
 		return boardDao.getTotalCount(keyword);
 	}
-
+	
 	@Override
 	public Map<String, Object> getList(String keyword, Integer page, Integer size) {
 		// 1. 페이징을 위한 기본 데이터 가공
@@ -86,7 +65,7 @@ public class BoardServiceImpl implements BoardService{
 		// 페이지 번호 2번 -> 5개
 		// 페이지 번호 3번 -> 2개
 
-		// 2. 파라미터 page 값 검증
+		// 2. 파라미터 page 값 유효성 검사
 		if (page < 1) {
 			page = 1;
 			currentBlock = 1;
@@ -132,8 +111,10 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public BoardVo getByNo(Long no) {
-		// TODO Auto-generated method stub
-		return null;
+		BoardVo boardVo = boardDao.getByNo(no);
+		if(boardVo != null)
+			boardDao.updateHit(no); // 1개 글 볼때 조회수 증가
+		return boardVo;
 	}
 
 	@Override
@@ -141,14 +122,13 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void update(BoardVo boardVo) {
-		// TODO Auto-generated method stub
+	public boolean update(BoardVo boardVo) {
+		return boardDao.update(boardVo) == 1;
 		
 	}
-
-
+	
 	@Override
 	public void delete(Long no) {
 		boardDao.delete(no);

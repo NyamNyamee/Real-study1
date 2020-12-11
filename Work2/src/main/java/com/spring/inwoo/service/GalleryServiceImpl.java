@@ -19,7 +19,7 @@ import com.spring.inwoo.vo.GalleryVo;
 public class GalleryServiceImpl implements GalleryService{
 	private static final String SAVE_PATH
 		= "C:\\Users\\user\\Desktop\\인우\\Workspaces\\STSWorkspace1\\Work2\\src\\main\\webapp\\resources\\upload";
-	public static final String BASE_URL = "/upload";
+	public static final String BASE_URL = "/resources/upload";
 	
 	@Autowired
 	GalleryDao galleryDao;
@@ -90,12 +90,12 @@ public class GalleryServiceImpl implements GalleryService{
 	}
 
 	@Override
-	public boolean delete(Long userNo, Long no) {
+	public void delete(Long userNo, Long no) {
 		GalleryVo galleryVo = new GalleryVo();
 		galleryVo.setUserNo(userNo);
 		galleryVo.setNo(no);
 		
-		return galleryDao.delete(galleryVo) == 1;
+		galleryDao.delete(galleryVo);
 	}
 
 

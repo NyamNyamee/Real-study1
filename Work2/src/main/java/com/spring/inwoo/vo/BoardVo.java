@@ -1,15 +1,25 @@
 package com.spring.inwoo.vo;
 
 public class BoardVo {
+	// 글번호
 	private Long no;
+	// 제목
 	private String title;
-	private String userName;
-	private String regDate;
-	private Integer hit;
+	// 내용
 	private String content;
+	// 작성시간
+	private String regDate;
+	// 작성자 이름
+	private String userName;
+	// 조회수
+	private Integer hit;
+	// 원본 글번호
 	private Integer groupNo;
+	// 게시글이 나타날 순서
 	private Integer orderNo;
+	// 답글의 깊이(원본글에 대해 몇번째 답글인지)
 	private Integer depth;
+	// 작성자 번호
 	private Long userNo;
 	
 	public Long getNo() {

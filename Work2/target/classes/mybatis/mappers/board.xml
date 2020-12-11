@@ -109,7 +109,7 @@
 					  		   		   where b.users_no = u.no
 					  		   		     and (b.title like CONCAT(CONCAT('%', LOWER(#{keyword})), '%')
 					  		   		         or b.content like CONCAT(CONCAT('%', LOWER(#{keyword})), '%'))
-					  		   		order by b.reg_date desc) x,
+					  		   		order by group_no desc, order_no asc) x,
 					  		   		 ( select @rownum := 0 ) r ) y
 					 where (#{page}-1)*#{size}+1 <= rn and rn <= #{page}*#{size}
 				]]>				
@@ -135,7 +135,7 @@
 					  		   		    from board b,
 					  		   		         users u
 					  		   		   where b.users_no = u.no
-					  		   		order by b.reg_date desc ) x,
+					  		   		order by group_no desc, order_no asc ) x,
 					  		   		 ( select @rownum := 0 ) r ) y
 					 where (#{page}-1)*#{size}+1 <= rn and rn <= #{page}*#{size}
 				]]>	

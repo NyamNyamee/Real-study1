@@ -58,13 +58,15 @@ public class BoardController {
 	public String write(@ModelAttribute BoardVo vo,
 			@RequestParam(value = "p", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "kwd", required = true, defaultValue = "") String keyword) {
+		
 		String email = getPrincipal();
 		List<UserVo> list = userService.getByName(email);
 		
 		vo.setUserNo(list.get(0).getNo());
+		
 		// 현재 로그인 유저의 번호를 가져와 BoardVo 객체에 설정!
 		// -> 작성한 유저를 관리하기 위해 Board는 유저의 번호를 갖는다.
-		boardService.writeMessage(vo);
+		boardService.insert(vo);
 		// 글쓰기 폼에서 작성한 내용들과 유저 번호를 갖고 있는 BoardVo를 전달!
 
 		return "redirect:/board" + "?p=" + page + "&kwd=" + WebUtil.encodeURL(keyword, "UTF-8");
@@ -74,7 +76,7 @@ public class BoardController {
 	public String view(@RequestParam(value = "no", required = true, defaultValue = "0") Long no,
 			@RequestParam(value = "p", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "kwd", required = true, defaultValue = "") String keyword, Model model) {
-		BoardVo boardVo = boardService.getMessage(no);
+		BoardVo boardVo = boardService.getByNo(no);
 
 		String email = getPrincipal();
 		LOG.debug("-------------------------------userEmail=" + email);
@@ -92,7 +94,7 @@ public class BoardController {
 	public String reply(@RequestParam(value = "no", required = true, defaultValue = "0") Long no,
 			@RequestParam(value = "p", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "kwd", required = true, defaultValue = "") String keyword, Model model) {
-		BoardVo boardVo = boardService.getMessage(no);
+		BoardVo boardVo = boardService.getByNo(no);
 
 		model.addAttribute("boardVo", boardVo);
 		model.addAttribute("page", page);
@@ -106,7 +108,7 @@ public class BoardController {
 	public String modify(@RequestParam(value = "no", required = true, defaultValue = "0") Long no,
 			@RequestParam(value = "p", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "kwd", required = true, defaultValue = "") String keyword, Model model) {
-		BoardVo boardVo = boardService.getMessage(no);
+		BoardVo boardVo = boardService.getByNo(no);
 
 		model.addAttribute("boardVo", boardVo);
 		model.addAttribute("page", page);
@@ -125,14 +127,14 @@ public class BoardController {
 		LOG.debug("-------------------------------userEmail=" + email);
 		List<UserVo> list = userService.getByName(email);
 		boardVo.setUserNo(list.get(0).getNo());
-		boardService.updateMessage(boardVo);
+		boardService.update(boardVo);
 		
 		return "redirect:/board/view" + "?no=" + boardVo.getNo() + "&p=" + page + "&kwd="
 				+ WebUtil.encodeURL(keyword, "UTF-8");
 	}
 	
 	
-	@RequestMapping(value="delete")
+	@RequestMapping(value="/delete")
 	public String delete(@ModelAttribute BoardVo boardVo) {
 		
 		boardService.delete(boardVo.getNo());
@@ -145,13 +147,11 @@ public class BoardController {
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 		if (principal instanceof UserDetails) {
 			userName = ((UserDetails) principal).getUsername();
 		} else {
 			userName = principal.toString();
 		}
-
 		return userName;
 	}
 }

@@ -12,5 +12,5 @@ public interface GalleryService {
 	public void insert(GalleryVo galleryVo,
 			MultipartFile multipartfile);
 	
-	public boolean delete(Long userNo, Long no);
+	public void delete(Long userNo, Long no);
 }

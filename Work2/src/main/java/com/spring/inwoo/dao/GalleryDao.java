@@ -10,7 +10,7 @@ public interface GalleryDao {
 	
 	public void insert(GalleryVo galleryVo);
 	
-	public int delete(GalleryVo galleryVo);
+	public void delete(GalleryVo galleryVo);
 }
 
 
