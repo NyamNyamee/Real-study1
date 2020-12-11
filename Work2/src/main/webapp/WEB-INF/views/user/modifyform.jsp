@@ -40,32 +40,38 @@
 						 function deleteUser(no) {
 							// alert(no);
 							let password = document.querySelector('#password').value;
-							// alert(password);
-							if(confirm("정말 삭제해요?")){
-								$.ajax({
-									type: "POST",
-									url: "deleteUserAjax",
-									data:{"${_csrf.parameterName}" : $('.csrf').val(),
-										"no" : no,
-										"password" : password },
-									success: function (data) {
-										// alert('통신완료');
-										// alert('data = ' + data);
-										
-										if(data == 'true'){
-											alert('안녕히 가세요');
-											location.href="/inwoo";
+							console.log(password);
+							if(password != null && password.trim().length != 0){
+								if(confirm("삭제후 아이디를 복구할 수 없습니다.\n정말 삭제할까요?")){
+									$.ajax({
+										type: "POST",
+										url: "deleteUserAjax",
+										data:{"${_csrf.parameterName}" : $('.csrf').val(),
+											"no" : no,
+											"password" : password },
+										success: function (data) {
+											// alert('통신완료');
+											// alert('data = ' + data);
+											
+											if(data == 'true'){
+												alert('안녕히 가세요');
+												location.href="/inwoo";
+											}
+											else{
+												alert('비밀번호가 일치하지 않습니다');
+												$("#password").val("");
+												$("#password").focus();
+											}		
+										},
+										error: function () {
+											alert('통신실패');
 										}
-										else{
-											alert('비밀번호가 일치하지 않습니다');
-											$("#password").val("");
-											$("#password").focus();
-										}		
-									},
-									error: function () {
-										alert('통신실패');
-									}
-								});
+									});
+								}
+							}
+							else{
+								alert('패스워드를 입력하세요');
+								document.querySelector('#password').focus();
 							}
 						};
 					</script>
