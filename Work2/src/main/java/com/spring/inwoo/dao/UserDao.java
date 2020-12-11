@@ -30,6 +30,9 @@ public interface UserDao {
 	
 	// 사용자 정보 수정
 	public void update(UserVo vo);
+	
+	// 사용자 삭제
+	public void delete(Long no);
 }
 
 

@@ -30,6 +30,7 @@ label.block-label, fieldset legend 	{ margin-bottom:3px }
 
 fieldset				{ border:none }
 input[type="submit"]	{ display:block; width:80px; margin:20px auto }
+#deleteUserBtn	{ display:block; width:80px; margin:20px auto; color: rgba(200, 50, 50, 30);}
 
 
 

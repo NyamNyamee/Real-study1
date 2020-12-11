@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/resources/assets/css/user.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
 </head>
 <body>
 	<div id="container">
@@ -15,7 +18,7 @@
 			<div id="user">
 				<form id="join-form" name="joinform" method="post" action="${pageContext.request.contextPath}/user/modify">
 					<%-- 이부분을 반드시 숨겨서 가져가야 한다. --%>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<input type="hidden" class="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="${userVo.name}">
 					
@@ -32,6 +35,40 @@
 					</fieldset>
 					
 					<input type="submit" value="수정하기">
+					<button type="button" id="deleteUserBtn" onclick="deleteUser(${userVo.no})">회원탈퇴</button>
+					<script type="text/javascript">
+						 function deleteUser(no) {
+							// alert(no);
+							let password = document.querySelector('#password').value;
+							// alert(password);
+							if(confirm("정말 삭제해요?")){
+								$.ajax({
+									type: "POST",
+									url: "deleteUserAjax",
+									data:{"${_csrf.parameterName}" : $('.csrf').val(),
+										"no" : no,
+										"password" : password },
+									success: function (data) {
+										// alert('통신완료');
+										// alert('data = ' + data);
+										
+										if(data == 'true'){
+											alert('안녕히 가세요');
+											location.href="/inwoo";
+										}
+										else{
+											alert('비밀번호가 일치하지 않습니다');
+											$("#password").val("");
+											$("#password").focus();
+										}		
+									},
+									error: function () {
+										alert('통신실패');
+									}
+								});
+							}
+						};
+					</script>
 				</form>
 			</div>
 		</div>

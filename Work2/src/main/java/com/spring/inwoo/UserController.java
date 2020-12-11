@@ -158,6 +158,28 @@ public class UserController {
 		return "redirect:/";
 	}
 
+	// 회원탈퇴
+	@RequestMapping(value = "/deleteUserAjax")
+	@ResponseBody
+	public String deleteUserAjax(HttpServletRequest request, HttpServletResponse response) {
+		Long no = Long.parseLong(request.getParameter("no"));
+		String password  = request.getParameter("password");
+		
+		UserVo vo = userService.getByNo(no);
+		
+		// db의 비밀번호와 입력한 비밀번호가 같을 때에만 로그아웃 시키고 DB에서 삭제
+		if(password.equals(vo.getPassword()))
+		{
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			if (auth != null) {
+				new SecurityContextLogoutHandler().logout(request, response, auth);
+			}
+			userService.delete(no);
+			return "true";
+		}
+		return "false";
+	}
+	
 	// 시큐리티에서 유저 아이디 얻기
 	private String getPrincipal() {
 		String userName = null;

@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService{
 		userDao.update(vo);
 	}
 
+	@Override
+	public void delete(Long no) {
+			userDao.delete(no);
+	}
+
 }
 
 

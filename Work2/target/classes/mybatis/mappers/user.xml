@@ -29,7 +29,7 @@
 	
 	<select id="getByNo" parameterType="long" resultType="UserVo">
 		<![CDATA[
-			select no, email, name, gender
+			select no, password, email, name, gender
 			from users
 			where no=#{no}
 		]]>
@@ -59,6 +59,12 @@
 			where email=#{email}
 		]]>
 	</update>
+	
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from users where no=${no}
+		]]>
+	</delete>
 </mapper>
 
 
